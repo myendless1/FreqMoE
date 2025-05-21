@@ -1,6 +1,6 @@
 # FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers
 The official repository of paper "FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers" 
-<div align="center">
+<div align="left">
  <a href='https://arxiv.org/pdf/2505.06858'><img src='https://img.shields.io/badge/arXiv-2505.06858-b31b1b.svg'></a> &nbsp;
  <a href='https://tarpelite.github.io/FreqMoE/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;
 </div>
