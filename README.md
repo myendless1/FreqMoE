@@ -35,11 +35,11 @@ To accelerate training, the dataset is cached into an LMDB database. On the firs
 /path/to/your/cache/directory
 ```
 
-No manual operation is needed; the scripts will check and create the cache as required, however, it may consume like 10 mins.
+No manual operation is needed; the scripts will check and create the cache as required, however, it may consume like 10 mins. When a cache duplicate is created, it will be reused when use the same datafile afterwards.
 
 #### Statistics (std/mean) Mechanism
 
-Before training, the mean and standard deviation (std) for each variable are computed for normalization. If the specified stats file does not exist, the code will automatically scan the data and generate it. Precomputed stats files are provided in:
+Before training, the mean and standard deviation (std) for each variable are computed for normalization. If the specified stats file does not exist, the code will automatically scan the data and generate it. We provide precomputed stats files for the following datasets:
 
 ```
 stats/std_mean_values_2dcfd_rand_m0.1_0.01.txt
@@ -47,7 +47,7 @@ stats/std_mean_values_2dcfd_rand_m0.1_1e-08.txt
 stats/std_mean_values_2dcfd_turb_m0.1_1e-08.txt
 ```
 
-If you use a custom dataset, simply run the training once to generate the stats file automatically.
+If you use a custom dataset, simply run the training once to generate the stats file automatically, it takes serveral minutes depending on the size of datafile.
 
 ---
 
