@@ -23,7 +23,7 @@ Experiments on both regular and irregular grid PDEs demonstrate that FreqMoE ach
 Furthermore, the approach demonstrates remarkable stability in long-term predictions and generalizes seamlessly to various FNO variants and grid structures, 
 establishing a new "<b>L</b>ow frequency <b>P</b>retraining, <b>H</b>igh frequency <b>F</b>ine-tuning" paradigm for solving PDEs.
 
-## Dataset Description
+## Training
 
 This example opensource code uses the [PDEBench](https://github.com/ArashMehrjou/PDEBench) 2DCFD dataset. The original data is in HDF5 format and contains multi-variable fields for fluid dynamics (e.g., velocity, density, pressure).
 
