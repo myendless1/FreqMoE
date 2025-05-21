@@ -1,7 +1,13 @@
-# MoE-FNO: Training with PDEBench 2DCFD Dataset
+# FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers
+The official repository of paper "FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers" [IJCAI 2025](https://arxiv.org/pdf/2505.06858)
 
-## Overview
-![overview](./assets/method.png)
+## Introduction
+<div align="center">
+ <a href='https://arxiv.org/pdf/2505.06858'><img src='https://img.shields.io/badge/arXiv-2505.06858-b31b1b.svg'></a> &nbsp;
+ <a href='https://tarpelite.github.io/FreqMoE/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;
+</div>
+
+![method](./assets/method.png)
 Fourier Neural Operators (FNO) have emerged as promising solutions for efficiently solving partial differential equations (PDEs) by learning infinite-dimensional function mappings through frequency domain transformations. 
 However, the sparsity of high-frequency signals limits computational efficiency for high-dimensional inputs, 
 and fixed-pattern truncation often causes high-frequency signal loss, reducing performance in scenarios such as high-resolution inputs or long-term predictions. 
@@ -14,7 +20,7 @@ establishing a new "<b>L</b>ow frequency <b>P</b>retraining, <b>H</b>igh frequen
 
 ## Dataset Description
 
-This project uses the [PDEBench](https://github.com/ArashMehrjou/PDEBench) 2DCFD dataset. The original data is in HDF5 format and contains multi-variable fields for fluid dynamics (e.g., velocity, density, pressure).
+This example opensource code uses the [PDEBench](https://github.com/ArashMehrjou/PDEBench) 2DCFD dataset. The original data is in HDF5 format and contains multi-variable fields for fluid dynamics (e.g., velocity, density, pressure).
 
 ## Data Caching with LMDB
 
@@ -31,9 +37,9 @@ No manual operation is needed; the scripts will check and create the cache as re
 Before training, the mean and standard deviation (std) for each variable are computed for normalization. If the specified stats file does not exist, the code will automatically scan the data and generate it. Precomputed stats files are provided in:
 
 ```
-/path/to/your/stats/std_mean_values_2dcfd_rand_m0.1_0.01.txt
-/path/to/your/stats/std_mean_values_2dcfd_rand_m0.1_1e-08.txt
-/path/to/your/stats/std_mean_values_2dcfd_turb_m0.1_1e-08.txt
+stats/std_mean_values_2dcfd_rand_m0.1_0.01.txt
+stats/std_mean_values_2dcfd_rand_m0.1_1e-08.txt
+stats/std_mean_values_2dcfd_turb_m0.1_1e-08.txt
 ```
 
 If you use a custom dataset, simply run the training once to generate the stats file automatically.
@@ -106,6 +112,4 @@ python train_gated_freq_MoE_from_dense.py \
 - Replace all `/path/to/your/xxx` with your actual paths.
 - Training logs and model checkpoints will be saved automatically.
 - It is recommended to always perform low-frequency pretraining before high-frequency finetuning for best results.
-
-For further customization, refer to the source code and script comments.
 
