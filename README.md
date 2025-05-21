@@ -1,14 +1,14 @@
 # FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers
 The official repository of paper "FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers" 
+<div align="center">
+ <a href='https://arxiv.org/pdf/2505.06858'><img src='https://img.shields.io/badge/arXiv-2505.06858-b31b1b.svg'></a> &nbsp;
+ <a href='https://tarpelite.github.io/FreqMoE/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;
+</div>
 
 ## News
 + [2025-04-29]</b> 🎉 Our paper has been accepted by IJCAI 2025!
 + [2025-05-21]</b> 🎉 Training code for Regular Grid PDEs (2DCFD) are open-sourced.
 
-<div align="center">
- <a href='https://arxiv.org/pdf/2505.06858'><img src='https://img.shields.io/badge/arXiv-2505.06858-b31b1b.svg'></a> &nbsp;
- <a href='https://tarpelite.github.io/FreqMoE/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;
-</div>
 
 ## Introduction
 
