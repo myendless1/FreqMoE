@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, { delimiters: [ { left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false } ] });">
+    </script>
+</head>
+
+<body>
+    <!-- Title and Author -->
+    <section class="hero is-medium">
+        <div class="hero-body" style="padding-bottom: 2rem;">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-2 publication-title">
+                            FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers
+                        </h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a target="_blank" href="https://tarpelite.github.io/">Tianyu&#160;Chen</a><sup>1</sup>,
+                                <a target="_blank" href="https://www.zhouhaoyi.com/">Haoyi&#160;Zhou</a><sup>2</sup>,
+                                <a target="_blank" href="https://myendless1.github.io/">Ying&#160;Li</a><sup>3</sup>,
+                                <a target="_blank" href="https://pkuhaowang.github.io/">Hao&#160;Wang</a><sup>3</sup>,
+                                <a target="_blank" href="https://petruscrus.github.io/">Zhenzhe&#160;Zhang</a><sup>3</sup>,
+                                <br>
+                                <a target="_blank" href="https://pkuhaowang.github.io/">Tianchen&#160;Zhu</a><sup>4</sup>,
+                                <a target="_blank" href="https://www.shanghangzhang.com/">Shanghang&#160;Zhang</a><sup>3</sup>,
+                                <a target="_blank" href="https://myjianxin.github.io/introduction/index.html">Jianxin&#160;Li</a><sup>1</sup><sup>&#9993;&#160;</sup>,
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>SKLCCSE, School of Computer Science and Engineering, Beihang University, China;</span>
+                            <span class="author-block"><sup>2</sup>School of Software, Beihang University, China;</span>
+                            <span class="author-block"><sup>3</sup>SKLMIP, School of Computer Science, Peking University, China;</span>
+                            <span class="author-block"><sup>3</sup>School of Reliability and Systems Engineering, Beihang University, China</span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>&#9993;&#160;</sup>Corresponding Author</span>
+                        </div>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">{tianyuc, haoyi, lijx}@buaa.edu.cn</span>
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <span class="link-block">
+                                    <a target="_blank" href="https://arxiv.org/abs/2505.06858" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon"><i class="ai ai-arxiv"></i></span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                    <a target="_blank" href="https://arxiv.org/pdf/2505.06858" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                                        <span>PDF</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                    <a href="https://github.com/PKUHaoWang/EmbodiedOcc2" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon"><i class="fab fa-github"></i></span>
+                                        <span>Code coming soon</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abstract -->
+    <section class="section" style="padding-top: 1.5rem;">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3 has-text-centered">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p class="is-size-5">
+                            Fourier Neural Operators (FNO) have emerged as promising solutions for efficiently solving partial differential equations (PDEs) by learning infinite-dimensional function mappings through frequency domain transformations. 
+                            However, the sparsity of high-frequency signals limits computational efficiency for high-dimensional inputs, 
+                            and fixed-pattern truncation often causes high-frequency signal loss, reducing performance in scenarios such as high-resolution inputs or long-term predictions. 
+                            To address these challenges, we propose FreqMoE, an efficient and progressive training framework that exploits the dependency of high-frequency signals on low-frequency components. 
+                            The model first learns low-frequency weights and then applies a sparse upward-cycling strategy to construct a mixture of experts (MoE) in the frequency domain, 
+                            effectively extending the learned weights to high-frequency regions. 
+                            Experiments on both regular and irregular grid PDEs demonstrate that FreqMoE achieves up to <b>16.6%</b> accuracy improvement while using merely 2.1% parameters (47.32x reduction) compared to dense FNO. 
+                            Furthermore, the approach demonstrates remarkable stability in long-term predictions and generalizes seamlessly to various FNO variants and grid structures, 
+                            establishing a new "<b>L</b>ow frequency <b>P</b>retraining, <b>H</b>igh frequency <b>F</b>ine-tuning" paradigm for solving PDEs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivation -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="is-centered has-text-centered">
+                <div class="is-four-fifths">
+                    <h2 class="title is-3">Motivation</h2>
+                    <div class="content">
+                        <img src="assets/images/challenges.jpg" class="interpolation-image" alt="" style="max-width: 80%; margin: 2rem auto; display: block;" />
+                        <p class="is-size-5 has-text-justified">
+                            ​Though the popularity and usefulness of FNO, there are still several drawbacks of it.
+                            Fixed high-frequency truncation in FNO limits computational efficiency and degrades accuracy in high-resolution or long-term prediction tasks.
+                            Post-training refinement approaches (e.g., Pde-refiner) incur heavy computational costs and lack generalizability.
+                            Leveraging ​frequency dependencies in physics​--high-frequency signals often depend on low-frequency components, 
+                            we propose FreqMoe, a novel framework that learns low-frequency weights and then applies a upward-cycling strategy to construct a mixture of experts (MoE) in the frequency domain for efficient high-frequency processing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Method Overview -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="has-text-centered">
+                <h2 class="title is-3">Method Overview</h2>
+                <div class="content">
+                    <img src="assets/method.png" alt="Method Overview" style="max-width: 90%; margin: 2rem auto; display: block;" />
+                    <p class="is-size-5 has-text-justified">
+                        <b>Methods overview of FreqMoE.</b> 
+                        <b>(a)</b> The standard Fourier Neural Operator (FNO) architecture  consisting of input lifting (P), a sequence of Fourier layers, and output projection (Q). 
+                        <b>(b)</b> Our modified Fourier layer design with a mixture-of-experts mechanism, 
+                        where the gating networker dynamically assigns frequency components to specialized experts after FFT decomposition. 
+                        High-frequency components (lighter shades) are processed by high-frequency experts, while low-frequency components are handled by the base expert. 
+                        <b>(c)</b> Our expert initialization strategy, 
+                        where pre-trained weights $R$ are used as a shared base component $R_{base}$ and  expert-specific delta weights $\Delta R$ are initialized with LoRA trick, enabling efficient parameter sharing and specialized frequency processing.
+                    </p>
+                </div>
+
+                <div class="content has-text-justified">
+                    <h2 class="title is-4">Highlights</h2>
+                    <ul class="is-size-5">
+                        <li>
+                            We propose FreqMoE, a lightweight post-training framework that dynamically enhances high-frequency processing capabilities in neural PDE solvers. Our approach generalizes seamlessly across the FNO family on both structured and unstructured grids, establishing an efficient "low-frequency pretraining, high-frequency fine-tuning" paradigm.
+                        </li>
+                        <li>
+                            Inspired by physical principles of frequency dependencies in PDEs, we develop a LoRA-based expert initialization scheme that efficiently reuses low-frequency weights. This design achieves remarkable parameter efficiency (<b>47.32$\times$</b> reduction) while maintaining competitive performance through sparse dynamic computation.
+                        </li>
+                        <li>
+                            Through comprehensive evaluation on diverse PDE systems, we demonstrate that FreqMoE significantly outperforms conventional FNO variants, achieving up to <b>16.6%</b> accuracy improvement in high-resolution tasks (512×512) and superior stability in long-term predictions, all while maintaining minimal computational overhead.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Results -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="has-text-centered">
+                <h2 class="title is-3">Results</h2>
+                <div class="columns is-variable is-8">
+                    <!-- Left column: tables and descriptions -->
+                    <div class="column is-8">
+                        <div class="content">
+                            <img src="assets/regular_result.png" alt="Regular Results" style="max-width: 90%; margin: 2rem auto; display: block;" />
+                            <p class="is-size-5 has-text-justified">
+                                Tab.1 Performance on <b>Regular-Grid PDEs</b>. Comparison of models with varying frequency modes, where # Params indicates the number
+                                of parameters activated during inference. Underlined values represent the best performance achieved by FNO baselines. Results with blue
+                                background show our FreqMoE, where superscript ∗ and † denote models trained from scratch and upcycled from dense FNO, respectively.
+                                The bold values highlight our best performance.
+                            </p>
+                        </div>
+                        <div class="content">
+                            <img src="assets/irregular_result.png" alt="Irregular Results" style="max-width: 90%; margin: 2rem auto; display: block;" />
+                            <p class="is-size-5 has-text-justified">
+                                Tab.2 Performance on <b>Irregular-Grid PDEs</b>. Comparison of models on two representative irregular-grid tasks: AirFoil and Elasticity,
+                                where # Params indicates the number of parameters activated during inference. Underlined values represent the best performance achieved
+                                by Geo-FNO baselines. Results with blue background show our FreqMoE approach, where superscript ∗ and † denote models trained from
+                                scratch and upcycled from dense Geo-FNO, respectively. The bold values highlight our best performance.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Right column: visualization and description -->
+                    <div class="column is-4">
+                        <div class="content">
+                            <img src="assets/visualization.png" alt="Visualization Results" style="max-width: 90%; margin: 2rem auto; display: block;" />
+                            <p class="is-size-5 has-text-justified">
+                                Fig.1 Visualization of prediction errors. Left Column: Irregular Grid Results from AirFoil. Right Column: Regular Grid Results from CFD-Turb 512. Red circles highlight regions with high-frequency components, where our FreqMoE demonstrates better capability in capturing fine-grained spatial details compared to FNO.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content has-text-centered">
+                        <p class="is-size-6">
+                            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                            You are free to borrow the of this website, we just ask that you link back to this page in the footer.
+                            <br>
+                            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
