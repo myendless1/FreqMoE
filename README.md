@@ -26,18 +26,18 @@ establishing a new "<b>L</b>ow frequency <b>P</b>retraining, <b>H</b>igh frequen
 ## Training
 
 This example opensource code uses the [PDEBench](https://github.com/ArashMehrjou/PDEBench) 2DCFD dataset. The original data is in HDF5 format and contains multi-variable fields for fluid dynamics (e.g., velocity, density, pressure).
-
-### Data Caching with LMDB
+### Dataset Preparation
+#### Data Caching with LMDB
 
 To accelerate training, the dataset is cached into an LMDB database. On the first run, the code automatically converts the HDF5 dataset to LMDB format and caches it. Subsequent runs load data directly from LMDB, greatly improving data loading speed. The cache directory should be set as:
 
 ```
-/path/to/your/data_your-dataset-name
+/path/to/your/cache/directory
 ```
 
-No manual operation is needed; the scripts will check and create the cache as required.
+No manual operation is needed; the scripts will check and create the cache as required, however, it may consume like 10 mins.
 
-### Statistics (std/mean) Mechanism
+#### Statistics (std/mean) Mechanism
 
 Before training, the mean and standard deviation (std) for each variable are computed for normalization. If the specified stats file does not exist, the code will automatically scan the data and generate it. Precomputed stats files are provided in:
 
@@ -51,7 +51,7 @@ If you use a custom dataset, simply run the training once to generate the stats 
 
 ---
 
-## Two-Stage Training Paradigm
+### Two-Stage Training Paradigm
 
 ### 1. Low-Frequency Pretraining
 
