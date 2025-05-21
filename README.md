@@ -1,11 +1,11 @@
 # FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers
 The official repository of paper "FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers" [IJCAI 2025](https://arxiv.org/pdf/2505.06858)
-
-## Introduction
 <div align="center">
  <a href='https://arxiv.org/pdf/2505.06858'><img src='https://img.shields.io/badge/arXiv-2505.06858-b31b1b.svg'></a> &nbsp;
  <a href='https://tarpelite.github.io/FreqMoE/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;
 </div>
+
+## Introduction
 
 ![method](./assets/method.png)
 Fourier Neural Operators (FNO) have emerged as promising solutions for efficiently solving partial differential equations (PDEs) by learning infinite-dimensional function mappings through frequency domain transformations. 
@@ -22,7 +22,7 @@ establishing a new "<b>L</b>ow frequency <b>P</b>retraining, <b>H</b>igh frequen
 
 This example opensource code uses the [PDEBench](https://github.com/ArashMehrjou/PDEBench) 2DCFD dataset. The original data is in HDF5 format and contains multi-variable fields for fluid dynamics (e.g., velocity, density, pressure).
 
-## Data Caching with LMDB
+### Data Caching with LMDB
 
 To accelerate training, the dataset is cached into an LMDB database. On the first run, the code automatically converts the HDF5 dataset to LMDB format and caches it. Subsequent runs load data directly from LMDB, greatly improving data loading speed. The cache directory should be set as:
 
@@ -32,7 +32,7 @@ To accelerate training, the dataset is cached into an LMDB database. On the firs
 
 No manual operation is needed; the scripts will check and create the cache as required.
 
-## Statistics (std/mean) Mechanism
+### Statistics (std/mean) Mechanism
 
 Before training, the mean and standard deviation (std) for each variable are computed for normalization. If the specified stats file does not exist, the code will automatically scan the data and generate it. Precomputed stats files are provided in:
 
